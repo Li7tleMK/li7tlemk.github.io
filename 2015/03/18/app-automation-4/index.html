@@ -1,0 +1,886 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="移动App自动化测试," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Bo1's Notes" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="我用Java写了3个测试脚本，分别测试Native App、Hybird App、Web App。用TestNG单元测试框架。
+测试Native App一个TestNG测试脚本需要3个必要的部分：
+
+1个setup()，用于测试前初始化工作：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动App自动化测试（四）">
+<meta property="og:url" content="http://bo1.me/2015/03/18/app-automation-4/index.html">
+<meta property="og:site_name" content="Bo1's Notes">
+<meta property="og:description" content="我用Java写了3个测试脚本，分别测试Native App、Hybird App、Web App。用TestNG单元测试框架。
+测试Native App一个TestNG测试脚本需要3个必要的部分：
+
+1个setup()，用于测试前初始化工作：">
+<meta property="og:image" content="http://7xi85h.com1.z0.glb.clouddn.com/chrome_inspect.gif">
+<meta property="og:updated_time" content="2015-03-26T13:52:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动App自动化测试（四）">
+<meta name="twitter:description" content="我用Java写了3个测试脚本，分别测试Native App、Hybird App、Web App。用TestNG单元测试框架。
+测试Native App一个TestNG测试脚本需要3个必要的部分：
+
+1个setup()，用于测试前初始化工作：">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 移动App自动化测试（四） | Bo1's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Bo1's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                移动App自动化测试（四）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-18T00:00:00+08:00" content="Mar 18 2015">
+              Mar 18 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/自动化测试/" itemprop="url" rel="index">
+                    <span itemprop="name">自动化测试</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/18/app-automation-4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/03/18/app-automation-4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我用Java写了3个测试脚本，分别测试Native App、Hybird App、Web App。用TestNG单元测试框架。</p>
+<h2 id="测试Native-App"><a href="#测试Native-App" class="headerlink" title="测试Native App"></a>测试Native App</h2><p>一个TestNG测试脚本需要3个必要的部分：</p>
+<ul>
+<li>1个setup()，用于测试前初始化工作：<a id="more"></a>
+</li>
+</ul>
+<!--code-->
+<pre><code>@BeforeClass
+public void setup() throws Exception {
+    //你要测试的APK
+    File appDir = new File(&quot;Apk&quot;);
+    File app = new File(appDir, &quot;Kuozhiv2.apk&quot;); 
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, &quot;&quot;);
+    //测试平台
+    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME,&quot;Android&quot;); 
+    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,&quot;Google_Nexus_4&quot;); 
+    //Android版本
+    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, &quot;4.4&quot;);
+    //Package name
+    capabilities.setCapability(MobileCapabilityType.APP_PACKAGE,&quot;com.edusoho.kuozhi&quot;);
+    //Launch Activity
+    capabilities.setCapability(MobileCapabilityType.APP_ACTIVITY,&quot;.KuozhiActivity&quot;);
+    capabilities.setCapability(MobileCapabilityType.APP,app.getAbsolutePath());
+    driver = new AndroidDriver(new URL(&quot;http://127.0.0.1:4723/wd/hub&quot;),capabilities);
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    System.out.print(&quot;App is launched!&quot;);
+}
+</code></pre><ul>
+<li>1个tearDown()，用于测试完毕清理工作：</li>
+</ul>
+<!--code-->
+<pre><code>@AfterClass
+public void tearDown() throws Exception {
+    driver.quit();
+}
+</code></pre><ul>
+<li>至少1个test()测试用例：</li>
+</ul>
+<!--code-->
+<pre><code>@Test
+public void splashTest() throws Exception {
+
+    Thread.sleep(2000);
+    int Y = driver.manage().window().getSize().getHeight();
+    int X = driver.manage().window().getSize().getWidth();
+
+    int sX = (int) (X * 0.8);
+    int sY = (int) (Y * 0.5);
+    int eX = (int) (X * 0.2);
+    int eY = sY;
+    int duration = 600;
+
+    //第一个模拟滑动
+    driver.swipe(sX, sY, eX, eY, duration);
+    //第二个模拟滑动
+    driver.swipe(sX, sY, eX, eY, duration);
+
+    WebElement enterMainActivityElement = driver.findElement(By
+            .id(&quot;com.edusoho.kuozhi:id/splash_ok_btn&quot;));
+    enterMainActivityElement.click();
+
+    WebElement enterSchoolElement = driver.findElement(By
+            .id(&quot;com.edusoho.kuozhi:id/qr_other_btn&quot;));
+    enterSchoolElement.click();
+}
+</code></pre><p>这个测试NativeApp的脚本比较简单：滑动2次Splash，点击进入，登录等事件。<strong>注：抓取控件可以根据ID，如果控件没有ID还可以用XPath</strong>。</p>
+<p>测试效果：</p>
+<video src="http://7xi85h.com1.z0.glb.clouddn.com/native_test.mp4" style="clear:both;display:block;margin:auto;width:320px;height:533px" controls="controls"><br>此浏览器不支持此标签<br></video>
+
+<h2 id="测试Hybird-App"><a href="#测试Hybird-App" class="headerlink" title="测试Hybird App"></a>测试Hybird App</h2><p>在测试Hybird App的时候，有一点需要注意：</p>
+<blockquote>
+<p>只有测试设备或者模拟器版本是Android 4.4（API 19）及以上，Appium才能探测到一个Activity中的WebView控件，如果低于Android 4.4（API 19），那么改用Selendroid模式。因为在4.4上WebView是Chromium内核，之前都是Webkit内核。</p>
+</blockquote>
+<h3 id="如何定位WebView中页面的元素？"><a href="#如何定位WebView中页面的元素？" class="headerlink" title="如何定位WebView中页面的元素？"></a>如何定位WebView中页面的元素？</h3><p>UiAutomatorViewer只能定位Activity中的UI元素，WebView已经是最小单元UI，不能解析WebView中页面元素。这里我使用Chrome DevTools中的inspect来解析WebView中的UI元素。</p>
+<p><img src="http://7xi85h.com1.z0.glb.clouddn.com/chrome_inspect.gif" style="clear:both;display:block;margin:auto;width:620px;height:360px;" alt="图片名称"></p>
+<ul>
+<li>setup()初始化部分代码：</li>
+</ul>
+<!--code-->
+<pre><code>@BeforeClass
+public void setup() throws Exception {
+    //other code ...
+    //如果你测试的设备的Android版本低于4.4，那么Automation Name要改成&quot;Selendroid&quot;，Appium Server端也要改成&quot;Selendroid&quot;
+    capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME,&quot;Appium&quot;); 
+    //other code ...
+}
+</code></pre><ul>
+<li>test()测试用例部分代码：</li>
+</ul>
+<!--code-->
+<pre><code>@Test
+public void webViewLogin() throws Exception {
+    //other code ...
+    Set&lt;String&gt; contextNames = driver.getContextHandles();
+    for (String contextName : contextNames) {
+        System.out.println(&quot;---&gt;&quot; + contextName);
+        if (contextName.contains(&quot;NATIVE_APP&quot;)) {
+            srtActivityContextString = contextName;
+        }
+        if (contextName.contains(&quot;WEBVIEW&quot;)) {
+            strWebViewContext = contextName;
+        }
+    }
+    driver.context(strWebViewContext);//把driver切换到WebView的context，再抓取WebView内页面的UI元素
+    //other code ...
+}
+</code></pre><p>测试效果：</p>
+<video src="http://7xi85h.com1.z0.glb.clouddn.com/hybird_test.mp4" style="clear:both;display:block;margin:auto;width:320px;height:533px" controls="controls"><br>此浏览器不支持此标签<br></video>
+
+<h2 id="测试Web-App"><a href="#测试Web-App" class="headerlink" title="测试Web App"></a>测试Web App</h2><p>用Appiumku框架测试WebApp的时候有以下几点需要注意：</p>
+<ul>
+<li>目前Appium的WebApp测试只支持Chrome浏览器。</li>
+<li><p>Chrome在x86模拟器上除非自己编译，否则是装不上或者存在各种问题的。请用ARM模拟器或真机，或者直接使用selenium测试框架直接对Web进行测试。因为我用的Genymotion模拟器，是x86的，所以发现了这个坑。可以在<a href="https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/mobile-web.md" target="_blank" rel="external">官网文档</a>看到这个说明。</p>
+</li>
+<li><p>setup()测试初始化之前，需要指定浏览器名称，如下代码：</p>
+</li>
+</ul>
+<!--code-->
+<pre><code>@BeforeClass
+public void setup() throws Exception {
+    //other code ...
+    capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, &quot;chrome&quot;);
+    //other code ...
+}
+</code></pre><ul>
+<li>driver需要指定webview的url，如下代码：</li>
+</ul>
+<!--code-->
+<pre><code>@Test
+public void registerTest() throws Exception {
+    //other code ...
+    driver.get(web_app_url;
+}
+</code></pre><p>测试效果：</p>
+<video src="http://7xi85h.com1.z0.glb.clouddn.com/webapp_test.mp4" style="clear:both;display:block;margin:auto;width:320px;height:533px" controls="controls"><br>此浏览器不支持此标签<br></video>
+
+
+
+
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/移动App自动化测试/" rel="tag">#移动App自动化测试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/16/app-automation-3/" rel="next" title="移动App自动化测试（三）">
+                <i class="fa fa-chevron-left"></i> 移动App自动化测试（三）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/01/charles-android/" rel="prev" title="Mac下使用Charles实现对Android手机进行抓包">
+                Mac下使用Charles实现对Android手机进行抓包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/5380455?v=3&s=460"
+               alt="Bo1" />
+          <p class="site-author-name" itemprop="name">Bo1</p>
+          <p class="site-description motion-element" itemprop="description">看完记得给爷关上。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Li7tleMK" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/Li7tleMK" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试Native-App"><span class="nav-number">1.</span> <span class="nav-text">测试Native App</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试Hybird-App"><span class="nav-number">2.</span> <span class="nav-text">测试Hybird App</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何定位WebView中页面的元素？"><span class="nav-number">2.1.</span> <span class="nav-text">如何定位WebView中页面的元素？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试Web-App"><span class="nav-number">3.</span> <span class="nav-text">测试Web App</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  Copyrights &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="author" itemprop="copyrightHolder">Bo1. All Rights Reserved.</span>
+
+</div>
+
+<div class="powered-by">
+   <a class="theme-link" href="http://hexo.io">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'bo1';
+      var disqus_identifier = '2015/03/18/app-automation-4/';
+      var disqus_title = '移动App自动化测试（四）';
+      var disqus_url = 'http://bo1.me/2015/03/18/app-automation-4/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+
+  
+  
+
+
+</body>
+</html>

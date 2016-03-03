@@ -197,6 +197,8 @@
       
 
       
+
+
       
       
     </ul>
@@ -288,6 +290,7 @@
 
           
           
+
         </div>
       </header>
     
@@ -366,6 +369,12 @@ $ appium &amp;
 <p><img style="clear:both;display:block;margin:auto;width:500px;height:340px" src="http://7xi85h.com1.z0.glb.clouddn.com/uiauto_guide.gif" alt=""></p>
 <p>从右下控件属性框可以看到控件的任何属性。</p>
 
+      
+    </div>
+
+    <div>
+      
+        
       
     </div>
 
@@ -762,7 +771,7 @@ $ appium &amp;
     NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
           NexT.utils.displaySidebar();
         }
@@ -809,6 +818,7 @@ $ appium &amp;
 
 
 
+  
   
   
 

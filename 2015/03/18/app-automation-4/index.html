@@ -178,6 +178,8 @@
       
 
       
+
+
       
       
     </ul>
@@ -269,6 +271,7 @@
 
           
           
+
         </div>
       </header>
     
@@ -422,6 +425,12 @@ public void registerTest() throws Exception {
 
 
 
+      
+    </div>
+
+    <div>
+      
+        
       
     </div>
 
@@ -818,7 +827,7 @@ public void registerTest() throws Exception {
     NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
           NexT.utils.displaySidebar();
         }
@@ -865,6 +874,7 @@ public void registerTest() throws Exception {
 
 
 
+  
   
   
 

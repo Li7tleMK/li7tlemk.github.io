@@ -189,6 +189,8 @@ Server也是跨平台的，你可以使用Mac OS X、Windows或者Linux；">
       
 
       
+
+
       
       
     </ul>
@@ -280,6 +282,7 @@ Server也是跨平台的，你可以使用Mac OS X、Windows或者Linux；">
 
           
           
+
         </div>
       </header>
     
@@ -327,6 +330,12 @@ Server也是跨平台的，你可以使用Mac OS X、Windows或者Linux；">
 <hr>
 <p>部分内容参考 <a href="http://www.cnblogs.com/nbkhic/p/3803804.html" target="_blank" rel="external">乙醇的cnblog</a></p>
 
+      
+    </div>
+
+    <div>
+      
+        
       
     </div>
 
@@ -723,7 +732,7 @@ Server也是跨平台的，你可以使用Mac OS X、Windows或者Linux；">
     NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
 
-      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
           NexT.utils.displaySidebar();
         }
@@ -770,6 +779,7 @@ Server也是跨平台的，你可以使用Mac OS X、Windows或者Linux；">
 
 
 
+  
   
   
 
